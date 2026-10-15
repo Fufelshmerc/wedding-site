@@ -24,12 +24,27 @@
   background: var(--red);
   box-shadow: 0 0 0 calc(4*var(--u)) rgba(164, 52, 32, .22),
               0 calc(4*var(--u)) calc(12*var(--u)) rgba(24,43,75,.3);
-  filter: blur(0);
 }
 .btn:active {
   box-shadow: 0 0 0 calc(2*var(--u)) rgba(164, 52, 32, .25);
 }
+/* невидимая рамка вокруг кнопки */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: calc(-5*var(--u));                /* рамка чуть шире самой кнопки */
+  border: calc(2*var(--u)) solid var(--red);
+  border-radius: calc(24*var(--u));        /* чуть больше, чем радиус кнопки 19 */
+  opacity: 0;
+  filter: blur(6px);                       /* вот сама размытость — только у рамки */
+  transition: opacity .3s ease;
+  pointer-events: none;                    /* рамка не перехватывает клики */
+}
 
+/* при наведении рамка проявляется — размытая, как мягкое свечение */
+.btn:hover::after {
+  opacity: .8;
+}
 /* медленная пульсация, чтобы кнопку заметили ещё до наведения */
 @keyframes btn-pulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(164, 52, 32, 0); }
@@ -146,7 +161,7 @@ a.tx{text-decoration:none;color:inherit}
     <img class="a" src="assets/star5.svg" alt="" style="--x:357;--y:142;--w:27">
     <img class="a" src="assets/star3.svg" alt="" style="--x:49;--y:468;--w:34">
     <img class="a" src="assets/star1.svg" alt="" style="--x:312;--y:498;--w:56">
-    <img class="a" src="assets/star5.svg" alt="" style="--x:301;--y:7;--w:33">
+    <img class="a" src="assets/star5.svg" alt="" style="--x:301;--y:730;--w:33">
 
     <p class="c pre" style="--y:77">НАКОНЕЦ-ТО</p>
     <h1 class="c" style="--y:98">МЫ ЖЕНИМСЯ!</h1>
