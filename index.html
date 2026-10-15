@@ -17,7 +17,13 @@
 .btn, a.tx, .lk {
   transition: background-color .25s ease, color .25s ease, box-shadow .25s ease;
 }
-
+.blured-image {
+	filter: blur (5px);
+	transition: filter 0.3s ease;
+}
+.blured-image:hover {
+	filter: blur(0px)
+}
 /* кнопки: смена цвета + мягкое сияние, без смещения */
 .btn:hover {
   background: var(--red);
