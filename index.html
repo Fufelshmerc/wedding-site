@@ -16,13 +16,11 @@
 /* плавность для всех ссылок */
 .btn, a.tx, .lk {
   transition: background-color .25s ease, color .25s ease, box-shadow .25s ease;
+  filter: blur(5px);
+  transition: filter 0.3s ease;
 }
-.blured-image {
-	filter: blur(5px);
-	transition: filter 0.3s ease;
-}
-.blured-image:hover {
-	filter: blur(0px);
+.btn:hover {
+	filter: blur(0);
 }
 /* кнопки: смена цвета + мягкое сияние, без смещения */
 .btn:hover {
@@ -149,7 +147,7 @@ a.tx{text-decoration:none;color:inherit}
     <img class="a" src="assets/star4.svg" alt="" style="--x:95;--y:40;--w:47">
     <img class="a" src="assets/star5.svg" alt="" style="--x:357;--y:142;--w:27">
     <img class="a" src="assets/star3.svg" alt="" style="--x:49;--y:468;--w:34">
-    <img class="a" src="assets/star1.svg" alt="" style="--x:312;--y:493;--w:56">
+    <img class="a" src="assets/star1.svg" alt="" style="--x:312;--y:500;--w:56">
     <img class="a" src="assets/star5.svg" alt="" style="--x:301;--y:723;--w:33">
 
     <p class="c pre" style="--y:77">НАКОНЕЦ-ТО</p>
