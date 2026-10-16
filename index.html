@@ -164,9 +164,23 @@ a.tx{text-decoration:none;color:inherit}
 @keyframes spinT{to{transform:rotate(360deg)}}
 .st{transform-box:fill-box;transform-origin:center;animation:spinT var(--sp,30s) linear infinite var(--dir,normal)}
 
+/* звёзды в шапке: заметно мигают, светятся и медленно вращаются */
+@keyframes tw2{
+  0%,100%{opacity:.6;scale:.8;filter:drop-shadow(0 0 0 rgba(140,205,248,0)) drop-shadow(0 0 0 rgba(140,205,248,0))}
+  50%{opacity:1;scale:1;filter:drop-shadow(0 0 calc(6*var(--u)) rgba(140,205,248,.9)) drop-shadow(0 0 calc(14*var(--u)) rgba(140,205,248,.55))}
+}
+.tw2{animation-name:tw2,spin;animation-duration:2.6s,var(--sp,30s);animation-timing-function:ease-in-out,linear;animation-iteration-count:infinite;animation-direction:normal,var(--dir,normal);animation-delay:var(--tw,0s),0s}
+
+/* звёзды в «Пожеланиях»: мягкое белое свечение, как у кнопок */
+@keyframes glowW{
+  0%,100%{filter:drop-shadow(0 0 0 rgba(255,250,238,0)) drop-shadow(0 0 0 rgba(255,250,238,0));scale:1}
+  50%{filter:drop-shadow(0 0 calc(7*var(--u)) rgba(255,250,238,.75)) drop-shadow(0 0 calc(16*var(--u)) rgba(255,250,238,.4));scale:1.1}
+}
+.glowW{animation:glowW 2.4s ease-in-out infinite var(--tw,0s)}
+
 @media (prefers-reduced-motion:reduce){
   .js .rv{opacity:1;translate:none;scale:none;rotate:none;transition:none}
-  .btn,.tw,.spin,.st,.ribbon .track,.cal .d .hl{animation:none}
+  .btn,.tw,.tw2,.glowW,.spin,.st,.ribbon .track,.cal .d .hl{animation:none}
 }
 </style>
 </head>
@@ -342,6 +356,8 @@ a.tx{text-decoration:none;color:inherit}
         if(el.classList.contains('pop')) setTimeout(function(){
           var src=el.getAttribute('src')||'';
           if(/\/rs\d\.svg$/.test(src)){el.style.setProperty('--sp',/rs1/.test(src)?'26s':'34s');el.style.setProperty('--dir',/rs1/.test(src)?'normal':'reverse');el.classList.add('spin')}
+          else if(/\/star\d\.svg$/.test(src)){el.style.setProperty('--tw',(-Math.random()*2.6).toFixed(1)+'s');el.style.setProperty('--sp',(24+Math.random()*16).toFixed(0)+'s');el.style.setProperty('--dir',Math.random()<.5?'normal':'reverse');el.classList.add('tw2')}
+          else if(/\/sw\.svg$/.test(src)){el.style.setProperty('--tw',(-Math.random()*2.4).toFixed(1)+'s');el.classList.add('glowW')}
           else{el.style.setProperty('--tw',(Math.random()*3).toFixed(1)+'s'); el.classList.add('tw')}
         },1500+delay);
       });
