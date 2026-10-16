@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f1e7">
+<script>document.documentElement.classList.add("js")</script>
 <title>Саша и Вика: свадьба 19 декабря 2026</title>
 <meta name="description" content="Приглашение на свадьбу Саши и Вики, 19 декабря 2026, Одинцово">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,27 +20,16 @@
   transition: background-color .25s ease, color .25s ease, box-shadow .25s ease;
 }
 
-/* кнопки: смена цвета + мягкое сияние, без смещения */
-.btn:hover {
-  background: var(--red);
-  box-shadow: 0 0 0 calc(4*var(--u)) rgba(164, 52, 32, .22),
-              0 calc(4*var(--u)) calc(12*var(--u)) rgba(24,43,75,.3);
+/* кнопки: при наведении краснеют и мягко светятся */
+.btn:hover{background:var(--red);box-shadow:0 0 calc(16*var(--u)) calc(3*var(--u)) rgba(164,52,32,.36),0 0 calc(34*var(--u)) calc(8*var(--u)) rgba(164,52,32,.18)}
+.btn:active{box-shadow:0 0 calc(10*var(--u)) calc(2*var(--u)) rgba(164,52,32,.39)}
+/* пульсирующее размытое свечение (чтобы кнопку заметили до наведения) */
+@keyframes btn-glow{
+  0%,100%{box-shadow:0 0 0 0 rgba(164,52,32,0),0 0 0 0 rgba(164,52,32,0)}
+  50%{box-shadow:0 0 calc(14*var(--u)) calc(3*var(--u)) rgba(164,52,32,.39),0 0 calc(32*var(--u)) calc(7*var(--u)) rgba(164,52,32,.2)}
 }
-.btn:active {
-  box-shadow: 0 0 0 calc(2*var(--u)) rgba(164, 52, 32, .25);
-}
-
-/* медленная пульсация, чтобы кнопку заметили ещё до наведения */
-@keyframes btn-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(164, 52, 32, 0); }
-  50%      { box-shadow: 0 0 0 calc(6*var(--u)) rgba(164, 52, 32, .18); }
-}
-.btn {
-  animation: btn-pulse 2.2s ease-in-out infinite;
-}
-.btn:hover {
-  animation: none; /* при наведении остаётся статичное сияние */
-}
+.btn{animation:btn-glow 2.4s ease-in-out infinite}
+.btn:hover{animation:none}
 
 /* телефонный линк и Telegram: цвет + подчёркивание при наведении */
 a.tx:hover, .lk:hover {
@@ -62,13 +53,15 @@ a.tx:hover, .lk:hover {
 /* Вся верстка собрана в «единицах макета»: 1u = 1px макета шириной 402px.
    На телефоне страница тянется на всю ширину, на компьютере стоит колонкой до 480px. */
 :root{
-  --u:calc(min(100vw,480px)/402);
+  --col:min(100vw,480px);
+  --u:calc(var(--col)/402);
   --cream:#f6f1e7; --navy:#182b4b; --red:#a43420;
   --blue:#7b94ab; --olive:#919475; --paper:#f3ece0;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{background:var(--cream);color:var(--navy);font-family:Montserrat,sans-serif}
-.page{width:min(100vw,480px);margin:0 auto;position:relative;overflow:hidden}
+.page{width:var(--col);margin:0 auto;position:relative;overflow:hidden;background:var(--cream)}
 img{display:block}
 
 /* позиционирование: --x и --y слева и сверху, --w ширина (в единицах макета) */
@@ -85,7 +78,7 @@ h1{font-family:"Playfair Display",serif;font-weight:700;font-size:calc(41*var(--
 .lead{left:calc(33*var(--u));width:calc(336*var(--u));top:calc(654*var(--u));text-align:center;position:absolute;font-size:calc(15*var(--u));line-height:calc(18*var(--u))}
 .ribbon{position:absolute;left:calc(-1*var(--u));top:calc(768*var(--u));width:calc(404*var(--u));height:calc(93*var(--u))}
 .ribbon img{width:100%}
-.ribbon p{position:absolute;inset:0;padding:calc(4*var(--u)) calc(10*var(--u)) 0;display:flex;align-items:center;justify-content:space-around;color:var(--paper);font-size:calc(21*var(--u))}
+.ribbon p{position:absolute;inset:0;padding:calc(4*var(--u)) 0 0;display:flex;align-items:center;overflow:hidden;color:var(--paper);font-size:calc(21*var(--u));-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
 
 /* 2. дата */
 .date{position:relative;height:calc(442*var(--u))}
@@ -116,7 +109,7 @@ h1{font-family:"Playfair Display",serif;font-weight:700;font-size:calc(41*var(--
 
 
 /* общие текстовые блоки новых секций */
-.tx{position:absolute;left:calc(var(--x,0)*var(--u));top:calc(var(--y)*var(--u));font-size:calc(var(--s,14)*var(--u));line-height:calc(var(--lh,17)*var(--u));white-space:nowrap;transform:rotate(var(--r,0deg));transform-origin:left center;font-weight:400}
+.tx{position:absolute;left:calc(var(--x,0)*var(--u));top:calc(var(--y)*var(--u));font-size:max(11px,calc(var(--s,14)*var(--u)));line-height:calc(var(--lh,17)*var(--u));white-space:nowrap;transform:rotate(var(--r,0deg));transform-origin:left center;font-weight:400}
 .tx.ctr{left:0;width:100%;text-align:center;transform-origin:center}
 .tx b{font-weight:600}
 a.tx{text-decoration:none;color:inherit}
@@ -131,8 +124,50 @@ a.tx{text-decoration:none;color:inherit}
 .hd::before,.hd::after{content:"";flex:1;height:1px;background:#4a342d}
 .lk{display:flex;align-items:center;gap:calc(5*var(--u));font-weight:600}
 .lk img{width:calc(20*var(--u));height:calc(20*var(--u))}
-.rule{position:absolute;top:calc(355*var(--u));height:1px;background:var(--navy);opacity:.85;left:calc(var(--x)*var(--u));width:calc(var(--w)*var(--u))}}
+.rule{position:absolute;top:calc(355*var(--u));height:1px;background:var(--navy);opacity:.85;left:calc(var(--x)*var(--u));width:calc(var(--w)*var(--u))}
 
+
+/* ---------- анимации появления ---------- */
+.js .rv{opacity:0;translate:0 calc(18*var(--u));
+  transition:opacity .8s ease var(--d,0s),translate .8s cubic-bezier(.2,.7,.2,1) var(--d,0s),scale .8s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .5s ease,background-color .25s ease,color .25s ease,box-shadow .25s ease}
+.js .rv.pop{translate:0 0;scale:.3;rotate:-40deg;transition-property:opacity,translate,scale,rotate,transform}
+.js .rv.zoom{scale:.95}
+.js .rv.in{opacity:1;translate:0 0;scale:1;rotate:0deg}
+
+/* звёздочки мягко мерцают */
+@keyframes tw{0%,100%{opacity:1;scale:1}50%{opacity:.65;scale:1.14}}
+.tw{animation:tw 3.4s ease-in-out infinite;animation-delay:var(--tw,0s)}
+
+/* сердечко на дате «бьётся» */
+@keyframes beat{0%,50%,100%{transform:scale(1)}12%{transform:scale(1.13)}26%{transform:scale(1)}38%{transform:scale(1.08)}}
+.cal .d .hl{animation:beat 2.8s ease-in-out infinite}
+
+/* при наведении (только на компьютере) */
+@media (hover:hover){
+  img[src$="heart.png"]:hover{transform:scale(1.03) rotate(-1deg)}
+  img[src$="polaroids.png"]:hover{transform:scale(1.04) rotate(1.2deg)}
+  img[src$="palette.jpg"]:hover,img[src$="women.jpg"]:hover,img[src$="men.jpg"]:hover{transform:scale(1.02)}
+  .js .rv.in.a{transition-delay:0s}
+}
+
+
+/* бегущая строка на красной ленте */
+@keyframes marq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.ribbon .track{display:flex;flex:none;width:max-content;will-change:transform;backface-visibility:hidden;animation:marq 24s linear infinite}
+.ribbon .track span{flex:none;padding-right:calc(30*var(--u));white-space:nowrap}
+
+/* красные звёздочки в программе медленно вращаются */
+@keyframes spin{from{rotate:0deg}to{rotate:360deg}}
+.spin{animation:spin var(--sp,28s) linear infinite var(--dir,normal)}
+
+/* синие звёздочки на пунктире вращаются */
+@keyframes spinT{to{transform:rotate(360deg)}}
+.st{transform-box:fill-box;transform-origin:center;animation:spinT var(--sp,30s) linear infinite var(--dir,normal)}
+
+@media (prefers-reduced-motion:reduce){
+  .js .rv{opacity:1;translate:none;scale:none;rotate:none;transition:none}
+  .btn,.tw,.spin,.st,.ribbon .track,.cal .d .hl{animation:none}
+}
 </style>
 </head>
 <body>
@@ -161,7 +196,7 @@ a.tx{text-decoration:none;color:inherit}
 
     <div class="ribbon">
       <img src="assets/ribbon.png" alt="">
-      <p class="script" aria-label="Вы приглашены!"><span aria-hidden="true">Вы приглашены!</span><span aria-hidden="true">Вы приглашены!</span><span aria-hidden="true">Вы приглашены!</span></p>
+      <p class="script" aria-label="Вы приглашены!"><span class="track" aria-hidden="true"><span>Вы приглашены!</span><span>Вы приглашены!</span><span>Вы приглашены!</span><span>Вы приглашены!</span><span>Вы приглашены!</span><span>Вы приглашены!</span><span>Вы приглашены!</span><span>Вы приглашены!</span></span></p>
     </div>
   </header>
 
@@ -207,7 +242,15 @@ a.tx{text-decoration:none;color:inherit}
     <img class="a" src="assets/rs2.svg" alt="" style="--x:356;--y:135;--w:30">
     <h2 class="tx ctr pf navy" style="--y:103;--s:35;--lh:43">ПРОГРАММА ДНЯ</h2>
     <p class="tx sc red" style="--x:236;--y:165;--s:25;--lh:28;--r:-8deg">Ждём вас!</p>
-    <img class="a" src="assets/path.svg" alt="" style="--x:136;--y:215;--w:184">
+    <svg class="a" viewBox="178 137 184 547" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="--x:136;--y:215;--w:184;aspect-ratio:184/547"><path d="M214.999 139C194.665 154 175.069 183.797 218.999 218C288.999 272.5 382.957 326.159 355.498 385C320.499 460 243.999 385 275.499 385C306.999 385 218.227 436.106 195.999 497.5C174.999 555.5 237.829 584.122 275.499 600.5C321.5 620.5 371.499 635.5 350.999 682" stroke="#4C6782" stroke-width="0.7" stroke-dasharray="5 5"/>
+<ellipse cx="193.999" cy="172" rx="14" ry="15" fill="#B4C3D0"/>
+<path class="st" style="--sp:28s;--dir:normal" d="M196.634 158.797L195.048 169.644L206.57 168.416L195.785 172.217L203.016 181.076L193.817 174.03L189.525 184.117L191.112 173.27L179.589 174.498L190.375 170.698L183.143 161.839L192.343 168.885L196.634 158.797Z" fill="#4C6782"/>
+<ellipse cx="343.999" cy="320" rx="14" ry="15" fill="#B4C3D0"/>
+<path class="st" style="--sp:36s;--dir:reverse" d="M348.192 307.342L345.26 317.905L356.846 318.13L345.669 320.55L351.734 330.245L343.489 322.102L337.968 331.572L340.901 321.009L329.315 320.785L340.492 318.365L334.427 308.67L342.671 316.813L348.192 307.342Z" fill="#4C6782"/>
+<ellipse cx="201.974" cy="489.119" rx="14" ry="15" fill="#B4C3D0"/>
+<path class="st" style="--sp:32s;--dir:normal" d="M206.917 476.806L203.328 487.164L214.877 488.114L203.571 489.829L209.016 499.885L201.298 491.242L195.195 500.347L198.783 489.989L187.234 489.039L198.541 487.324L193.095 477.268L200.813 485.912L206.917 476.806Z" fill="#4C6782"/>
+<ellipse cx="336.354" cy="628.575" rx="14" ry="15" fill="#B4C3D0"/>
+<path class="st" style="--sp:40s;--dir:reverse" d="M339.523 618.111L338.485 629.024L349.931 627.217L339.351 631.556L347.02 640.039L337.477 633.466L333.699 643.757L334.737 632.844L323.291 634.651L333.871 630.312L326.203 621.828L335.745 628.402L339.523 618.111Z" fill="#4C6782"/></svg>
 
     <p class="tx pf navy" style="--x:198;--y:212;--s:35;--lh:43">15:00</p>
     <p class="tx navy" style="--x:198;--y:262">Сбор гостей в<br>«Теплица Парк»</p>
@@ -276,5 +319,36 @@ a.tx{text-decoration:none;color:inherit}
     <img class="a" src="assets/heartline.svg" alt="" style="--x:145;--y:733;--w:116">
   </section>
 </main>
+<script>
+(function(){
+  var d=document;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var els=[].slice.call(d.querySelectorAll('.page .tx,.page .nm,.page .lead,.page .hd,.page .cal,.page .band,.page .rule,.page .btn,.page .a'));
+  function showAll(){els.forEach(function(e){e.classList.add('in')})}
+  try{
+    els.forEach(function(e){
+      e.classList.add('rv');
+      var src=e.getAttribute('src')||'';
+      if(/\/(star\d|rs\d|sw|sn)\.svg$/.test(src)) e.classList.add('pop');
+      else if(/\/(heart|polaroids|palette|women|men)\.(png|jpg)$/.test(src)) e.classList.add('zoom');
+    });
+    if(!('IntersectionObserver' in window)){showAll();return}
+    var io=new IntersectionObserver(function(es){
+      var vis=es.filter(function(e){return e.isIntersecting}).sort(function(a,b){return a.boundingClientRect.top-b.boundingClientRect.top});
+      vis.forEach(function(e,i){
+        var el=e.target,delay=Math.min(i*90,540);
+        el.style.setProperty('--d',delay+'ms');
+        el.classList.add('in'); io.unobserve(el);
+        if(el.classList.contains('pop')) setTimeout(function(){
+          var src=el.getAttribute('src')||'';
+          if(/\/rs\d\.svg$/.test(src)){el.style.setProperty('--sp',/rs1/.test(src)?'26s':'34s');el.style.setProperty('--dir',/rs1/.test(src)?'normal':'reverse');el.classList.add('spin')}
+          else{el.style.setProperty('--tw',(Math.random()*3).toFixed(1)+'s'); el.classList.add('tw')}
+        },1500+delay);
+      });
+    },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){io.observe(e)});
+  }catch(err){showAll()}
+})();
+</script>
 </body>
 </html>
